@@ -5,48 +5,44 @@ import pyodbc, urllib
 from sqlalchemy import create_engine
 
 # **SQL ALCHEMY METHOD**----------------------------------------
-params = urllib.parse.quote_plus(
-    "Driver={SQL Server};"
-    "Server=DESKTOP-IF1AF28;"
-    "Database=KCC;"
-    "Trusted_Connection=yes;"
-)
-engine = create_engine(f"mssql+pyodbc:///?odbc_connect={params}")
-#----------------------------------------------------------------
+# params = urllib.parse.quote_plus(
+#     "Driver={SQL Server};"
+#     "Server=DESKTOP-IF1AF28;"
+#     "Database=KCC;"
+#     "Trusted_Connection=yes;"
+# )
+# engine = create_engine(f"mssql+pyodbc:///?odbc_connect={params}")
+# #----------------------------------------------------------------
 
-# **PYODBC METHOD**------------------------------------
-conn = pyodbc.connect(
-   r'Driver={SQL Server};'
-   r'Server=DESKTOP-IF1AF28;'  
-   r'Database=KCC;'        
-   r'Trusted_Connection=yes;'
-)
+# # **PYODBC METHOD**------------------------------------
+# conn = pyodbc.connect(
+#    r'Driver={SQL Server};'
+#    r'Server=DESKTOP-IF1AF28;'  
+#    r'Database=KCC;'        
+#    r'Trusted_Connection=yes;'
+# )
 
-query = """
-    Select c.CustomerName,
-    c.CustomerID,
-    OrderDate,
-    o.OrderID,
-    OrderTotal,
-    Phone
+# query = """
+#     Select c.CustomerName,
+#     c.CustomerID,
+#     OrderDate,
+#     o.OrderID,
+#     OrderTotal,
+#     Phone
 
-    From dbo.Orders o
+#     From dbo.Orders o
 
-    Join dbo.Customers c on o.CustomerID = c.CustomerID
-    Join dbo.Order_Product op on o.OrderID = op.OrderID
+#     Join dbo.Customers c on o.CustomerID = c.CustomerID
+#     Join dbo.Order_Product op on o.OrderID = op.OrderID
 
-    Order by OrderDate 
-"""
-# -----------------------------------------------------
+#     Order by OrderDate 
+# """
+# # -----------------------------------------------------
 
 @st.cache_data
 def load_data():
     order_csv = pd.read_csv('./order.csv')
-    if order_csv:
-        df=order_csv
-    else:
-        df = pd.read_sql(query, conn)
-        df.to_csv('orders.csv', index=True)
+    df = order_csv
     df.drop_duplicates(inplace=True)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
