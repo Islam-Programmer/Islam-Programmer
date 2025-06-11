@@ -148,10 +148,10 @@ def main():
         st.subheader(f'Filtered Data Based On [{date_filter}]')
         if date_filter == 'Day':
             st.write(total_per_day)
-            st.area_chart(total_per_day)
+            st.line_chart(total_per_day)
         elif date_filter == 'Month':
             st.write(total_per_month)
-            st.area_chart(total_per_month)
+            st.line_chart(total_per_month)
         elif date_filter == 'Year':
             st.write(total_per_year)
             st.bar_chart(total_per_year)
