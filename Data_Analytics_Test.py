@@ -50,7 +50,7 @@ def load_data():
 
 def main():
     df = load_data()
-    df = df.iloc[2:]
+    df = df.iloc[:, 1:]
     df['Month'] = df['OrderDate'].dt.to_period('M')
 
     def human_format(num):
