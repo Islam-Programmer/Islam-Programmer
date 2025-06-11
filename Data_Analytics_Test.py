@@ -41,8 +41,7 @@ from sqlalchemy import create_engine
 
 @st.cache_data
 def load_data():
-    order_csv = pd.read_csv('./order.csv')
-    df = order_csv
+    df = pd.read_csv('./order.csv')
     df.drop_duplicates(inplace=True)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
