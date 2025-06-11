@@ -42,8 +42,8 @@ from sqlalchemy import create_engine
 @st.cache_data
 def load_data():
     df = pd.read_csv('.devcontainer/orders.csv')
-    df.drop_duplicates(inplace=True)
     df = df.iloc[:, 1:]
+    df.drop_duplicates(inplace=True)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
     df['OrderDate'] = pd.to_datetime(df['OrderDate'], errors='coerce')
