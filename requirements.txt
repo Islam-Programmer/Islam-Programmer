@@ -1,0 +1,6 @@
+pandas
+streamlit
+sqlalchemy
+urllib
+pyodbc
+numpy
