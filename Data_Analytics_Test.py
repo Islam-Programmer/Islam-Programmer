@@ -43,15 +43,13 @@ from sqlalchemy import create_engine
 def load_data():
     df = pd.read_csv('.devcontainer/orders.csv')
     df.drop_duplicates(inplace=True)
-    df = df.iloc[1:]
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
     df['OrderDate'] = pd.to_datetime(df['OrderDate'], errors='coerce')
     return df
 
 def main():
-    df = load_data().reset_index()
-    df.drop('ignore', axis=1)
+    df = load_data()
     df['Month'] = df['OrderDate'].dt.to_period('M')
 
     def human_format(num):
