@@ -42,6 +42,7 @@ query = """
 @st.cache_data
 def load_data():
     df = pd.read_sql(query, conn)
+    df.to_csv('orders.csv', index=True)
     df.drop_duplicates(inplace=True)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
