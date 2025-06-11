@@ -4,7 +4,7 @@ import numpy as np
 import pyodbc, urllib
 from sqlalchemy import create_engine
 
-# **SQL ALCHEMY METHOD**----------------------------------------
+# # **SQL ALCHEMY METHOD**----------------------------------------
 # params = urllib.parse.quote_plus(
 #     "Driver={SQL Server};"
 #     "Server=DESKTOP-IF1AF28;"
@@ -41,7 +41,7 @@ from sqlalchemy import create_engine
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv('.devcontainer/orders.csv')
+    df = pd.reac_csv('.devcontainer/orders.csv')
     df.drop_duplicates(inplace=True)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
@@ -49,7 +49,8 @@ def load_data():
     return df
 
 def main():
-    df = load_data()
+    df = load_data().reset_index()
+    df = df.iloc[:, 1:]
     df['Month'] = df['OrderDate'].dt.to_period('M')
 
     def human_format(num):
@@ -101,7 +102,7 @@ def main():
         .sum()
         .sort_values(ascending=False)
         .reset_index()
-        .rename(columns={'OrderTotal': 'TotalRevenue'})
+        .rename(columns={'OrderTotal': 'Total Revenue'})
     )
 
     st.divider()
@@ -147,10 +148,10 @@ def main():
         st.subheader(f'Filtered Data Based On [{date_filter}]')
         if date_filter == 'Day':
             st.write(total_per_day)
-            st.line_chart(total_per_day)
+            st.area_chart(total_per_day)
         elif date_filter == 'Month':
             st.write(total_per_month)
-            st.line_chart(total_per_month)
+            st.area_chart(total_per_month)
         elif date_filter == 'Year':
             st.write(total_per_year)
             st.bar_chart(total_per_year)
