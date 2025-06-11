@@ -51,7 +51,7 @@ def load_data():
 
 def main():
     df = load_data().reset_index()
-    df = df.iloc[:, 1:]
+    df.drop('ignore', axis=1)
     df['Month'] = df['OrderDate'].dt.to_period('M')
 
     def human_format(num):
