@@ -1,10 +1,10 @@
-- 👋 Hi, I’m @Islam-Programmer
-- 👀 I’m interested in making games and learn how to Hacking 
-- 🌱 I’m currently learning Python and HTML 
-- 💞️ I’m looking to collaborate on Learning programming and help each other
-- 📫 How to reach me idk
-- 😄 Pronouns: He/ Him
-- ⚡ Fun fact: iam actually looks beginner but not too much😅
+while True:
+  choice = input("Who is the best programmer EVER?")
+  if choice == "islam-Programmer":
+    print("YEAH I AM")
+    break
+  else:
+    continue
 
 <!---
 Islam-Programmer/Islam-Programmer is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
